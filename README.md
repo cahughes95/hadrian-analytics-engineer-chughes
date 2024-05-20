@@ -200,8 +200,10 @@ Sample Output:
 ## Assumptions and Notes
 
 - The data is pulled from the [API-Sports NBA](https://api-sports.io/documentation/nba/v2#section/Introduction).
-- Only teams in the standard league and NBA teams are considered. Used `league=standard` query parameter for teams and games data. Added `season` parameter to the request for games and looped through to pull data for all seasons available.
-- Initially attempted to use asyncio to optimize requests to API, but had issues with the rate limit.
+- For the teams data pulled: Only standard league and NBA teams are considered. Used the `league=standard` query parameter for the API request. 
+- For the games data pulled: Used the `league=standard` and `season=YYYY` query parameters for the API requests. I looped through multiple seasons to pull all available season data for the last 10 seasons.
+- Initially attempted to use asyncio to send concurrent requests to API, but had issues with the rate limit (hence the "for loop" for the season requests).
+- When writing the SQL queries, I joined the `nba_teams` table on to the `nba_games` data to ensure only games for NBA teams were included in my final results. When I pulled the games data from the API, I couldn't filter out All-star teams but I was able to do that for the teams data, hence the joins in my queries. 
 - The `build_db.py` script handles the data extraction and transformation.
 - The `main.py` script runs the SQL queries to answer the specified tasks.
 
