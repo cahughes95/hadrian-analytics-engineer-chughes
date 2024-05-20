@@ -3,15 +3,19 @@ import duckdb
 from .games import Game
 from .teams import Team
 
-con = duckdb.connect(database='nba_data.db')  # Use a file path for persistent storage
+con = duckdb.connect(database='nba_data.db')
 
 def save_data(con, data, endpoint, data_class):
-
+    """
+    Save data from API request to appropriate staging table before transformation.
+    Flatten JSON data by converting nested dictionaries to class objects, 
+    then convert to a DataFrame for table insertion.
+    """
     flattened_data = [data_class(item).to_dict() for item in data]
     df = pd.DataFrame(flattened_data)
 
     table = f'stg_{endpoint}'
-    # Print DataFrame for debugging
+    # Debugging Dataframe
     print("DataFrame shape:", df.shape)
     print("DataFrame columns:", df.columns)
     print("DataFrame head:", df.head())
@@ -23,6 +27,10 @@ def save_data(con, data, endpoint, data_class):
     print(con.execute(f"SELECT * FROM {table} LIMIT 5").fetchall())
 
 def transform_teams_data(con):
+    """
+    Transform and load teams data from the staging table to the final table.
+    Filters for NBA teams and non-All Star teams.
+    """
     # Drop the final table if it exists
     con.execute("DROP TABLE IF EXISTS nba_teams")
 
@@ -36,7 +44,7 @@ def transform_teams_data(con):
     )
     """)
 
-    # Insert the transformed data into the final table
+    # Insert the transformed data into the final nba_teams table. Filter for NBA teams and non-All star teams.
     con.execute("""
     INSERT INTO nba_teams
     SELECT
@@ -52,10 +60,14 @@ def transform_teams_data(con):
     """)
 
 def transform_games_data(con):
-    # Drop the final table if it exists
+    """
+    Transform and load games data from the staging table to the final table.
+    Converts the game date_start to a DATE type.
+    """
+    # Drop the final nba_games table to replace old data
     con.execute("DROP TABLE IF EXISTS nba_games")
 
-    # Create the final table with the specified column types
+    # Create the final nba_games table
     con.execute("""
     CREATE TABLE nba_games (
         game_id INT,
@@ -68,7 +80,7 @@ def transform_games_data(con):
     )
     """)
 
-    # Insert the transformed data into the final table
+    # Insert the transformed data into nba_games table from the staging table. Convert game date_start to a DATE.
     con.execute("""
     INSERT INTO nba_games
     SELECT

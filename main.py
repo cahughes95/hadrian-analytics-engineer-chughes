@@ -2,14 +2,12 @@ import duckdb
 
 con = duckdb.connect('nba_data.db')
 
-# Read the .sql file
-with open('sql_queries.sql', 'r') as file:
+# Read the .sql file containing the task queries and split the script into individual queries.
+with open('task_queries.sql', 'r') as file:
     sql_script = file.read()
 
-# Split the script into individual queries
 queries = sql_script.split(';')
 
-# List of custom messages for each query
 messages = [
     "The top 10 highest-scoring games in the last decade are: ",
     "The win-loss record for each team over the last decade is: ",
@@ -21,12 +19,12 @@ messages = [
 
 # Execute each query and print the corresponding message and result
 for message, query in zip(messages, queries):
-    if query:  # Ignore empty queries
+    if query:
         try:
             result = con.execute(query).fetchall()
             print(message)
             for row in result:
                 print(row)
-            print()  # Add a blank line for better readability
+            print() 
         except duckdb.Error as e:
             print(f"Error executing query: {e}")

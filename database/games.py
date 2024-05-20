@@ -1,6 +1,7 @@
 
 class Game:
     def __init__(self, game_data):
+        # Initialize a Game object with data from a single game.
         self.game_id = game_data['id']
         self.season = game_data['season']
         self.date_start = game_data['date']['start']
@@ -10,6 +11,7 @@ class Game:
         self.visitor_team_points = game_data['scores']['visitors']['points']
 
     def to_dict(self):
+        # Convert the Game object to a dictionary for easier DataFrame conversion.
         return {
             'game_id': self.game_id,
             'season': self.season,
