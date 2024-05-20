@@ -206,8 +206,8 @@ Sample Output:
 - Notes about the NBA games data pulled
     - Used the `league=standard` and `season=YYYY` query parameters for the API requests. 
     - I looped through seasons to pull all available season data for the last 10 seasons.
-- Initially attempted to use asyncio to send concurrent requests to API, but had issues with the rate limit (hence the "for loop" for the season requests).
-- When writing the SQL queries, I joined the `nba_teams` table on to the `nba_games` data to ensure only games for NBA teams were included in my final results. When I pulled the games data from the API, I couldn't filter out All-star teams, so I joined my final teams table to exclude those All-star teams from appearing.
+    - Initially attempted to use asyncio to send concurrent requests to API, but had issues with the rate limit (hence the "for loop" for the season requests).
+- When writing the SQL queries, I joined the `nba_teams` table on to the `nba_games` data to ensure only games for NBA teams were included in my final results. When I pulled the games data from the API, I couldn't filter out All-Star teams, so I joined my final teams table to exclude those All-Star teams from appearing.
 - The `build_db.py` script handles the data extraction and transformation in the DuckDB database.
 - The `main.py` script runs the SQL queries and prints the answers to the specified tasks.
 
