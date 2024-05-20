@@ -2,7 +2,7 @@
 # Hadrian NBA Analytics Project
 ## Chris Hughes, Analytics Engineer
 
-This project is designed to extract, transform, and analyze NBA team and game data. The primary goals are to load data from the API, transform it into a usable format, and run various SQL queries to derive insights for the questions specified in the NBA project document.
+This project is designed to extract, transform, and analyze NBA team and game data. The primary goals are to load NBA data from an API into a DuckDB database, transform it into a usable format, and run various SQL queries to derive insights for the specified questions in the NBA project document.
 
 ## Project Structure
 
@@ -36,6 +36,7 @@ This project is designed to extract, transform, and analyze NBA team and game da
 - DuckDB
 - `requests` library
 - `pandas` library
+- `tabulate` library
 
 ### Installation
 
@@ -57,13 +58,13 @@ This project is designed to extract, transform, and analyze NBA team and game da
 
 ### Building the Database
 
-Run the `build_db.py` script to fetch the data from the API, save it to staging tables, and transform it into the final schema:
+Run the `build_db.py` script to fetch the data from the API, save it to staging tables in a DuckDB database, and transform it into the final schema:
 
 ```sh
 python build_db.py
 ```
 
-### Running Queries
+### Running SQL Queries for the Requested Tasks
 
 To run the provided SQL queries and obtain the results, execute the `main.py` script:
 
@@ -71,13 +72,12 @@ To run the provided SQL queries and obtain the results, execute the `main.py` sc
 python main.py
 ```
 
-### SQL Queries Explained
+### SQL Queries Explained (see 'task_queries.sql')
 
 #### Task 1: Top 10 Highest-Scoring Games in the Last Decade
 
-```sql
--- This query calculates the total score for each game and selects the top 10 highest-scoring games in the last decade.
-```
+This query calculates the total score for each game and selects the top 10 highest-scoring games in the last decade.
+
 
 Sample Output:
 ```
@@ -100,9 +100,8 @@ Sample Output:
 
 #### Task 2: Win-Loss Record for Each Team Over the Last Decade
 
-```sql
--- This query calculates the win-loss record for each team over the last decade.
-```
+This query calculates the win-loss record for each team over the last decade.
+
 
 Sample Output:
 ```
@@ -125,9 +124,8 @@ Sample Output:
 
 #### Task 3: Team Performance by Season (Average Points Scored)
 
-```sql
--- This query calculates the average points scored by each team per season over the last decade.
-```
+This query calculates the average points scored by each team per season over the last decade.
+
 
 Sample Output:
 ```
@@ -150,9 +148,8 @@ Sample Output:
 
 #### Task 4: Conference Analysis
 
-```sql
--- This query calculates the total number of wins for each conference over the last decade and selects the conference with the most wins.
-```
+This query calculates the total number of wins for each conference over the last decade and selects the conference with the most wins.
+
 
 Sample Output:
 ```
@@ -165,9 +162,7 @@ Sample Output:
 
 #### Task 5: Detailed Game Analysis
 
-```sql
--- This query calculates the average margin of victory for each team over the last decade and selects the team with the highest average margin of victory.
-```
+This query calculates the average margin of victory for each team over the last decade and selects the team with the highest average margin of victory.
 
 Sample Output:
 ```
@@ -180,9 +175,8 @@ Sample Output:
 
 #### Task 6: Analyzing Team Performance Over Multiple Seasons
 
-```sql
--- This query calculates the average points scored and allowed by each team per season over the last decade.
-```
+This query calculates the average points scored and allowed by each team per season over the last decade.
+
 
 Sample Output:
 ```
@@ -206,12 +200,13 @@ Sample Output:
 ## Assumptions and Notes
 
 - The data is pulled from the [API-Sports NBA](https://api-sports.io/documentation/nba/v2#section/Introduction).
-- Only teams in the standard league and NBA teams are considered.
+- Only teams in the standard league and NBA teams are considered. Used `league=standard` query parameter for teams and games data. Added `season` parameter to the request for games and looped through to pull data for all seasons available.
+- Initially attempted to use asyncio to optimize requests to API, but had issues with the rate limit.
 - The `build_db.py` script handles the data extraction and transformation.
 - The `main.py` script runs the SQL queries to answer the specified tasks.
 
 ## Conclusion
 
-This project demonstrates how to extract, transform, and analyze NBA data using Python and SQL. By following the setup instructions, you can recreate the database and run the provided queries to gain insights into NBA team performances over the last decade.
+This project demonstrates how to extract, transform, and analyze NBA data using Python and SQL. By following the setup instructions, you can recreate the DuckDB database and run the provided queries to gain insights into NBA team performances over the last decade.
 
-For any questions or issues, please open an issue on the GitHub repository or contact the project maintainer.
+Thank you for your time and consideration! :)
