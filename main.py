@@ -1,4 +1,5 @@
 import duckdb
+from tabulate import tabulate
 
 con = duckdb.connect('nba_data.db')
 
@@ -19,12 +20,12 @@ messages = [
 
 # Execute each query and print the corresponding message and result
 for message, query in zip(messages, queries):
-    if query:
+    if query.strip():  # Ensure the query is not empty
         try:
             result = con.execute(query).fetchall()
+            column_headers = [desc[0] for desc in con.description]
             print(message)
-            for row in result:
-                print(row)
-            print() 
+            print(tabulate(result[:10], headers=column_headers, tablefmt="pretty"))
+            print()
         except duckdb.Error as e:
             print(f"Error executing query: {e}")
