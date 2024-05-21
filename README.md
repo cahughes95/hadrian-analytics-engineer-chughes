@@ -2,7 +2,7 @@
 # Hadrian NBA Analytics Project
 ## Chris Hughes, Analytics Engineer
 
-This project is designed to extract, transform, and analyze NBA team and game data. The primary goals are to load NBA data from [API-Sports NBA](https://api-sports.io/documentation/nba/v2#section/Introduction) into a DuckDB database, transform it into a usable format, and run various SQL queries to derive insights for the specified questions in the NBA project document.
+This project is designed to extract, transform, and analyze NBA team and game data. The primary goals are to load NBA data from [API-Sports NBA](https://api-sports.io/documentation/nba/v2#section/Introduction) into a DuckDB database, transform it into a usable format, and run various SQL queries to derive insights for the specified questions in the NBA project document. The project requirements are located in the `SQL Test for Analytics Engineer.docx` file.
 
 ## Project Structure
 
@@ -23,6 +23,7 @@ This project is designed to extract, transform, and analyze NBA team and game da
 |   |── __init__.py
 ├── .gitignore
 ├── README.md
+|── SQL Test for Analytics Engineer.docx
 |── build_db.py
 |── main.py
 ├── nba_data.db
