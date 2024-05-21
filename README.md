@@ -22,10 +22,10 @@ This project is designed to extract, transform, and analyze NBA team and game da
 │       ├── teams.py
 |   |── __init__.py
 ├── .gitignore
+├── README.md
 |── build_db.py
 |── main.py
 ├── nba_data.db
-├── README.md
 ├── requirements.txt
 └── task_queries.sql
 ```
