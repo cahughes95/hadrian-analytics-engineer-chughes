@@ -38,7 +38,7 @@ This project is designed to extract, transform, and analyze NBA team and game da
 
 ## Getting Started
 
-### Prerequisites
+### 1. Prerequisites
 
 - Python 3.8 or higher
 - DuckDB
@@ -46,7 +46,7 @@ This project is designed to extract, transform, and analyze NBA team and game da
 - `pandas` library
 - `tabulate` library
 
-### Installation
+### 2. Installation
 
 1. Clone the repository:
     ```sh
@@ -64,7 +64,7 @@ This project is designed to extract, transform, and analyze NBA team and game da
     echo "API_KEY=your_api_key_here" > lib/.env
     ```
 
-### Building the Database
+### 3. Building the Database
 
 Run the `build_db.py` script to fetch the data from the API, save it to staging tables in a DuckDB database, and transform it into the final schema:
 
@@ -72,7 +72,7 @@ Run the `build_db.py` script to fetch the data from the API, save it to staging 
 python build_db.py
 ```
 
-### Running SQL Queries for the Requested Tasks
+### 4. Running SQL Queries for the Requested Tasks
 
 To run the provided SQL queries and obtain the results, execute the `main.py` script:
 
@@ -80,11 +80,11 @@ To run the provided SQL queries and obtain the results, execute the `main.py` sc
 python main.py
 ```
 
-### Answers to Project Tasks (SQL Query Results)
+## SQL Query Results (Task Answers)
 
 Below are the results from each SQL query I wrote and executed.
 
-#### Task 1: Top 10 Highest-Scoring Games in the Last Decade
+### Task 1: Top 10 Highest-Scoring Games in the Last Decade
 
 This query calculates the total score for each game and selects the top 10 highest-scoring games in the last decade.
 
@@ -108,7 +108,7 @@ Result:
 ...
 ```
 
-#### Task 2: Win-Loss Record for Each Team Over the Last Decade
+### Task 2: Win-Loss Record for Each Team Over the Last Decade
 
 This query calculates the win-loss record for each team over the last decade.
 
@@ -132,7 +132,7 @@ Result (top 10 included here, execute `main.py` to see full results):
 ...
 ```
 
-#### Task 3: Team Performance by Season (Average Points Scored)
+### Task 3: Team Performance by Season (Average Points Scored)
 
 This query calculates the average points scored by each team per season over the last decade.
 
@@ -156,7 +156,7 @@ Result (first 10 included here, execute `main.py` to see full results):
 ...
 ```
 
-#### Task 4: Conference Analysis
+### Task 4: Conference Analysis
 
 This query calculates the total number of wins for each conference over the last decade and selects the conference with the most wins.
 
@@ -170,7 +170,7 @@ Result:
 +------------+------------+
 ```
 
-#### Task 5: Detailed Game Analysis
+### Task 5: Detailed Game Analysis
 
 This query calculates the average margin of victory for each team over the last decade and selects the team with the highest average margin of victory.
 
@@ -183,7 +183,7 @@ Result:
 +-----------------------+-----------------------+
 ```
 
-#### Task 6: Analyzing Team Performance Over Multiple Seasons
+### Task 6: Analyzing Team Performance Over Multiple Seasons
 
 This query calculates the average points scored and allowed by each team per season over the last decade.
 
