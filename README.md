@@ -2,7 +2,7 @@
 # Hadrian NBA Analytics Project
 ## Chris Hughes, Analytics Engineer
 
-This project is designed to extract, transform, and analyze NBA team and game data. The primary goals are to load NBA data from an API into a DuckDB database, transform it into a usable format, and run various SQL queries to derive insights for the specified questions in the NBA project document.
+This project is designed to extract, transform, and analyze NBA team and game data. The primary goals are to load NBA data from [API-Sports NBA](https://api-sports.io/documentation/nba/v2#section/Introduction) into a DuckDB database, transform it into a usable format, and run various SQL queries to derive insights for the specified questions in the NBA project document.
 
 ## Project Structure
 
@@ -29,6 +29,12 @@ This project is designed to extract, transform, and analyze NBA team and game da
 ├── requirements.txt
 └── task_queries.sql
 ```
+
+### Notes About Structure
+
+- The SQL queries for the project tasks are located in the `task_queries.sql` file in the root directory.
+- The `build_db.py` script handles the data extraction and transformation in the DuckDB database. The client for requesting data from the API and the models for the DuckDB database are located in the `elt` folder.
+- The `main.py` script runs the SQL queries and prints the results for the specified tasks.
 
 ## Getting Started
 
@@ -75,10 +81,6 @@ python main.py
 ```
 
 ### SQL Queries Explained
-
-#### Script Containing SQL Queries
-
-The SQL queries for the tasks below are located in the 'task_queries.sql' file in the root directory.
 
 #### Task 1: Top 10 Highest-Scoring Games in the Last Decade
 
@@ -205,7 +207,6 @@ Sample Output:
 
 ## Assumptions and Notes
 
-- The data is pulled from [API-Sports NBA](https://api-sports.io/documentation/nba/v2#section/Introduction).
 - Notes about the NBA teams data pulled: 
     - Used the `league=standard` query parameter for the API request.
     - Only standard league and NBA teams are considered.  
@@ -214,8 +215,6 @@ Sample Output:
     - I looped through seasons to pull all available season data for the last 10 seasons.
     - Initially attempted to use asyncio to send concurrent requests to API, but had issues with the rate limit (hence the "for loop" for the season requests).
 - When writing the SQL queries, I joined the `nba_teams` table on to the `nba_games` data to ensure only games for NBA teams were included in my final results. When I pulled the games data from the API, I couldn't filter out All-Star teams, so I joined my final teams table to exclude those All-Star teams from appearing.
-- The `build_db.py` script handles the data extraction and transformation in the DuckDB database.
-- The `main.py` script runs the SQL queries and prints the answers to the specified tasks.
 
 ## Conclusion
 
