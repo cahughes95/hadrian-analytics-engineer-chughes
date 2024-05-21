@@ -80,14 +80,16 @@ To run the provided SQL queries and obtain the results, execute the `main.py` sc
 python main.py
 ```
 
-### SQL Queries Explained
+### Answers to Project Tasks (SQL Query Results)
+
+Below are the results from each SQL query I wrote and executed.
 
 #### Task 1: Top 10 Highest-Scoring Games in the Last Decade
 
 This query calculates the total score for each game and selects the top 10 highest-scoring games in the last decade.
 
 
-Sample Output:
+Result:
 ```
 +------------+-----------------------+-----------------------+------------+------------+-------------+
 |    date    |       home_team       |       away_team       | home_score | away_score | total_score |
@@ -111,7 +113,7 @@ Sample Output:
 This query calculates the win-loss record for each team over the last decade.
 
 
-Sample Output:
+Result (top 10 included here, execute `main.py` to see full results):
 ```
 +-----------------------+------+--------+
 |       team_name       | wins | losses |
@@ -135,7 +137,7 @@ Sample Output:
 This query calculates the average points scored by each team per season over the last decade.
 
 
-Sample Output:
+Result (first 10 included here, execute `main.py` to see full results):
 ```
 +----------------+--------+-------------------+
 |      team      | season | avg_points_scored |
@@ -159,7 +161,7 @@ Sample Output:
 This query calculates the total number of wins for each conference over the last decade and selects the conference with the most wins.
 
 
-Sample Output:
+Result:
 ```
 +------------+------------+
 | conference | total_wins |
@@ -172,7 +174,7 @@ Sample Output:
 
 This query calculates the average margin of victory for each team over the last decade and selects the team with the highest average margin of victory.
 
-Sample Output:
+Result:
 ```
 +-----------------------+-----------------------+
 |         team          | avg_margin_of_victory |
@@ -186,7 +188,7 @@ Sample Output:
 This query calculates the average points scored and allowed by each team per season over the last decade.
 
 
-Sample Output:
+Result (first 10 included here, execute `main.py` to see full results):
 ```
 +----------------+--------+-------------------+--------------------+
 |      team      | season | avg_points_scored | avg_points_allowed |
@@ -210,7 +212,7 @@ Sample Output:
 - Notes about the NBA teams data pulled: 
     - Used the `league=standard` query parameter for the API request.
     - Only standard league and NBA teams are considered.  
-- Notes about the NBA games data pulled
+- Notes about the NBA games data pulled:
     - Used the `league=standard` and `season=YYYY` query parameters for the API requests. 
     - I looped through seasons to pull all available season data for the last 10 seasons.
     - Initially attempted to use asyncio to send concurrent requests to API, but had issues with the rate limit (hence the "for loop" for the season requests).
