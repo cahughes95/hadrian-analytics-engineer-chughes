@@ -17,7 +17,7 @@ class Client:
         url = f"{self.base_url}/{endpoint}"      
         response = requests.get(url, headers=self.headers, params=query_params)
         response_json = response.json()
-        return response_json['response'], endpoint
+        return response_json['response']
 
     def get_games_data(self, num_seasons, endpoint, query_params=None):
         # Retrieve games data for a specified number of seasons by making repeated API requests, then aggregate and return the data.
@@ -29,7 +29,7 @@ class Client:
             query_params['season'] = year
             print(f"Requesting data for season: {year}")
             # Calls the get_basketball_data() function from above to make the API request, looping through seasons.
-            year_data, _ = self.get_basketball_data(endpoint, query_params)
+            year_data = self.get_basketball_data(endpoint, query_params)
             all_games.extend(year_data)
 
-        return all_games, 'games'
+        return all_games

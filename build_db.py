@@ -12,13 +12,15 @@ def build_db():
     query_params = {'league': 'standard'}
     
     # Fetch and save the NBA teams data
-    teams_data, teams_endpoint = client.get_basketball_data(endpoint='teams', query_params=query_params)
-    save_data(con, teams_data, teams_endpoint, Team)
+    teams_endpoint = 'teams'
+    teams_data = client.get_basketball_data(endpoint=teams_endpoint, query_params=query_params)
+    save_data(con, data=teams_data, endpoint=teams_endpoint, data_class=Team)
     transform_teams_data(con)
 
     # Fetch and save the NBA games data
-    games_data, games_endpoint = client.get_games_data(num_seasons=10, endpoint='games', query_params=query_params)
-    save_data(con, games_data, games_endpoint, Game)
+    games_endpoint = 'games'
+    games_data = client.get_games_data(num_seasons=10, endpoint=games_endpoint, query_params=query_params)
+    save_data(con, data=games_data, endpoint=games_endpoint, data_class=Game)
     transform_games_data(con)
 
 if __name__ == "__main__":
