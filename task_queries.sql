@@ -76,16 +76,9 @@ ORDER BY team, season;
 --Task 4: Conference Analysis
 WITH team_wins AS (
     SELECT
-        home_team AS team,
-        CASE WHEN home_score > away_score THEN 1 ELSE 0 END AS win
-    FROM nba_games
-    WHERE season >= season - 10
-
-    UNION ALL
-
-    SELECT
-        away_team AS team,
-        CASE WHEN away_score > home_score THEN 1 ELSE 0 END AS win
+        CASE WHEN home_score > away_score THEN home_team ELSE away_team END AS team,
+        CASE WHEN home_score > away_score THEN 1 ELSE 0 END AS home_win,
+        CASE WHEN away_score > home_score THEN 1 ELSE 0 END AS away_win
     FROM nba_games
     WHERE season >= season - 10
 ),
@@ -94,7 +87,7 @@ wins_with_conference AS (
     SELECT
         tw.team,
         t.conference,
-        tw.win
+        tw.home_win + tw.away_win AS win
     FROM team_wins tw
     JOIN nba_teams t ON tw.team = t.team_name
 )
@@ -110,29 +103,19 @@ LIMIT 1;
 --Task 5: Detailed Game Analysis
 WITH game_margins AS (
     SELECT
-        home_team AS team,
-        (home_score - away_score) AS margin_of_victory
+        CASE WHEN home_score > away_score THEN home_team ELSE away_team END AS team,
+        ABS(home_score - away_score) AS margin_of_victory
     FROM nba_games
     WHERE season >= season - 10
-    AND home_score > away_score
-
-    UNION ALL
-
-    SELECT
-        away_team AS team,
-        (away_score - home_score) AS margin_of_victory
-    FROM nba_games
-    WHERE season >= season - 10
-    AND away_score > home_score
 ),
 
 team_avg_margins AS (
     SELECT
         g.team,
-        ROUND(AVG(margin_of_victory), 2) AS avg_margin_of_victory
+        ROUND(AVG(g.margin_of_victory), 2) AS avg_margin_of_victory
     FROM game_margins g
-    JOIN nba_teams t on g.team = t.team_name
-    GROUP BY team
+    JOIN nba_teams t ON g.team = t.team_name
+    GROUP BY g.team
 )
 
 SELECT

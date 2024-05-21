@@ -8,24 +8,26 @@ This project is designed to extract, transform, and analyze NBA team and game da
 
 ```
 .
-├── api/
-│   ├── __init__.py
-│   ├── client.py
-├── build_db.py
-├── database/
-│   ├── __init__.py
-│   ├── db.py
-│   ├── games.py
-│   ├── teams.py
-├── lib/
-│   ├── __init__.py
-│   ├── settings.py
-├── main.py
-├── task_queries.sql
-├── tests/
-├── requirements.txt
+├── elt
+|   |── api/
+│       ├── __init__.py
+│       ├── client.py
+|   ├── lib/
+│       ├── __init__.py
+│       ├── settings.py
+|   |── models/
+│       ├── __init__.py
+│       ├── db.py
+│       ├── games.py
+│       ├── teams.py
+|   |── __init__.py
+├── .gitignore
+|── build_db.py
+|── main.py
+├── nba_data.db
 ├── README.md
-└── nba_data.db
+├── requirements.txt
+└── task_queries.sql
 ```
 
 ## Getting Started
@@ -72,7 +74,11 @@ To run the provided SQL queries and obtain the results, execute the `main.py` sc
 python main.py
 ```
 
-### SQL Queries Explained (see 'task_queries.sql')
+### SQL Queries Explained
+
+#### Script Containing SQL Queries
+
+The SQL queries for the tasks below are located in the 'task_queries.sql' file in the root directory.
 
 #### Task 1: Top 10 Highest-Scoring Games in the Last Decade
 
@@ -156,7 +162,7 @@ Sample Output:
 +------------+------------+
 | conference | total_wins |
 +------------+------------+
-|    West    |    6265    |
+|    West    |    6266    |
 +------------+------------+
 ```
 

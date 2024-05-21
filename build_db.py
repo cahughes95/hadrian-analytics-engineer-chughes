@@ -1,6 +1,6 @@
 import pandas as pd
-from api import Client
-from database import Team, Game, save_data, transform_teams_data, transform_games_data, con
+from elt import Client
+from elt import Team, Game, save_data, transform_teams_data, transform_games_data, con
 
 def build_db():
     """
